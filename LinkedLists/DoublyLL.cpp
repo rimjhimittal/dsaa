@@ -98,7 +98,7 @@ void deletenode(Node * &head, Node * &tail, int position){
         }
         prev -> next = curr -> next;
         curr -> next = NULL;
-        curr -> prev = prev;
+        curr -> prev = NULL;
         delete curr;
 
     }
@@ -141,7 +141,7 @@ int main(){
     insertAtTail(tail, 12);
     print(head); 
 
-    deletenode(head, tail, 2);
+    deletenode(head, tail, 3);
     print(head);
 
 
