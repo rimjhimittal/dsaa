@@ -44,52 +44,21 @@ cout<<key<<" occurs "<<cnt<<" times "<<endl;
 
 }
 
-
-void deletenode(Node * &head, int position){
-    if(position ==1){
-        Node * temp = head;
-        head= head-> next;
-        //memory free
-        temp -> next = NULL;
-        delete temp;
-    }
-    else{
-        Node * curr = head;
-        Node * prev = NULL;
-
-        int cnt  = 1;
-        while(cnt< position){
-            prev = curr;
-            curr = curr -> next;
-            cnt++;
-        }
-        if(curr->next==NULL){
-            prev -> next = curr -> next;
-        }
-        else{
-            prev -> next = curr -> next;
-        }
-        prev -> next = curr -> next;
-        curr -> next = NULL;
-        delete curr;
-
-    }
-
-}
-
 void deletion(Node * &head, int key){
-Node * temp = head;
-while(temp!= NULL){
-    
+Node * temp1 = head;
+while(temp1->next!= NULL){
+    Node * temp = temp1;
     if(temp-> data == key){
         if(temp == head){
             head = temp-> next;
             temp-> next = NULL;
             delete temp;
+            return;
         }
 
         else if(temp->next == NULL){
             delete temp;
+            return;
         }
 
         else{
@@ -106,7 +75,7 @@ while(temp!= NULL){
 
         }
     }
-    temp= temp-> next;
+    temp1= temp1-> next;
 }
 }
 
