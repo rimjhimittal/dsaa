@@ -44,6 +44,72 @@ cout<<key<<" occurs "<<cnt<<" times "<<endl;
 
 }
 
+
+void deletenode(Node * &head, int position){
+    if(position ==1){
+        Node * temp = head;
+        head= head-> next;
+        //memory free
+        temp -> next = NULL;
+        delete temp;
+    }
+    else{
+        Node * curr = head;
+        Node * prev = NULL;
+
+        int cnt  = 1;
+        while(cnt< position){
+            prev = curr;
+            curr = curr -> next;
+            cnt++;
+        }
+        if(curr->next==NULL){
+            prev -> next = curr -> next;
+        }
+        else{
+            prev -> next = curr -> next;
+        }
+        prev -> next = curr -> next;
+        curr -> next = NULL;
+        delete curr;
+
+    }
+
+}
+
+void deletion(Node * &head, int key){
+Node * temp = head;
+while(temp!= NULL){
+    
+    if(temp-> data == key){
+        if(temp == head){
+            head = temp-> next;
+            temp-> next = NULL;
+            delete temp;
+        }
+
+        else if(temp->next == NULL){
+            delete temp;
+        }
+
+        else{
+            Node * curr = head;
+            Node * prev = NULL;
+            while(curr != temp){
+            prev= curr;
+            curr = curr-> next;
+            }
+            prev-> next = curr-> next;
+            curr-> next = NULL;
+            delete curr;
+
+
+        }
+    }
+    temp= temp-> next;
+}
+}
+
 int main(){
     int  A[]= {1, 2 , 1, 2, 1, 3, 1 };
     Node * node1 = new Node(A[0]);
@@ -55,5 +121,9 @@ int main(){
     print(head);
 
     count(head, 1);
+
+    deletion(head, 1);
+
+    print(head);
 
 }
