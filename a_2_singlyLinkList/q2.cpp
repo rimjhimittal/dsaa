@@ -31,7 +31,7 @@ void print(Node * &head){
     cout<<endl;
 }
 
-void count(Node * &head, int key){
+int count(Node * &head, int key){
 Node * temp = head;
 int cnt = 0;
 while(temp!= NULL){
@@ -40,58 +40,78 @@ while(temp!= NULL){
     }
     temp= temp-> next;
 }
+return cnt;
+
 cout<<key<<" occurs "<<cnt<<" times "<<endl;
 
 }
 
-void deletion(Node * &head, int key){
-Node * temp1 = head;
-while(temp1->next!= NULL){
-    Node * temp = temp1;
-    if(temp-> data == key){
-        if(temp == head){
-            head = temp-> next;
-            temp-> next = NULL;
-            delete temp;
-            return;
+int search(int d, Node* &head){
+    Node * temp = head;
+    int pos= 1;
+    
+    while(temp!= NULL){
+        if(temp->data==d){
+            return pos;
         }
-
-        else if(temp->next == NULL){
-            delete temp;
-            return;
-        }
-
-        else{
-            Node * curr = head;
-            Node * prev = NULL;
-            while(curr != temp){
-            prev= curr;
-            curr = curr-> next;
-            }
-            prev-> next = curr-> next;
-            curr-> next = NULL;
-            delete curr;
-
-
-        }
+        temp= temp-> next;
+        pos++;
     }
-    temp1= temp1-> next;
 }
+
+void deletenode(Node * &head, Node * &tail, int position){
+    if(position ==1){
+        Node * temp = head;
+        head= head-> next;
+        //memory free
+        temp -> next = NULL;
+        delete temp;
+    }
+    else{
+        Node * curr = head;
+        Node * prev = NULL;
+
+        int cnt  = 1;
+        while(cnt< position){
+            prev = curr;
+            curr = curr -> next;
+            cnt++;
+        }
+        if(curr->next==NULL){
+            prev -> next = curr -> next;
+            tail= prev;
+        }
+        else{
+            prev -> next = curr -> next;
+        }
+        prev -> next = curr -> next;
+        curr -> next = NULL;
+        delete curr;
+
+    }
+
 }
+void finaldel(Node* &head, Node* & tail, int key){
+for(int i = 0; i< count(head, key); i++){
+    deletenode(head, tail, search(key, head));
+}}
+
+
+
 
 int main(){
     int  A[]= {1, 2 , 1, 2, 1, 3, 1 };
     Node * node1 = new Node(A[0]);
     Node * head= node1; 
     Node * tail= node1; 
-    for(int i = 1; i< 7; i++){
+    for(int i = 1; i< sizeof(A)/sizeof(int); i++){
         insertAtTail(tail, A[i]);
     }
     print(head);
 
     count(head, 1);
 
-    deletion(head, 1);
+    finaldel(head, tail, 1);
 
     print(head);
 
