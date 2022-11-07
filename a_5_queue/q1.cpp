@@ -1,100 +1,115 @@
-
 #include <iostream>
-
 using namespace std;
-
+#define n 100
 class queue
 {
+    int *arr;
+    int front;
+    int back;
+
 public:
-    int q[5], front, rear, x, result;
     queue()
     {
-        front = 0;
-        rear = 0;
+        arr = new int[n];
+        front = -1;
+        back = -1;
+    }
+    void enqueue(int x)
+    {
+        if (back == n - 1)
+        {
+            cout << "Queue Overflow" << endl;
+            return;
+        }
+        back++;
+        arr[back] = x;
+
+        if (front == -1)
+        {
+            front++;
+        }
+    }
+
+    void dequeue()
+    {
+        if (front == -1 || front > back)
+        {
+            cout << "No elements in queue" << endl;
+            return;
+        }
+        front++;
+    }
+    int peek()
+    {
+        if (front == -1 || front > back)
+        {
+            cout << "No elements in the queue" << endl;
+            return -1;
+        }
+        return arr[front];
     }
     bool isEmpty()
     {
-        if (front == rear)
+        if (front == -1 || front > back)
         {
             return true;
         }
-        else
+        return false;
+    }
+    bool isFull()
+    {
+        if (back == n - 1)
         {
-            return false;
+            return true;
         }
+        return false;
     }
-    void enq()
+    void display()
     {
-        if (rear >= 5)
-            cout << "\nQueue overflow!!\n";
-        else
+        for (int i = front; i <= back; i++)
         {
-            cout << "\nEnter the number to be inserted: ";
-            cin >> x;
-            rear++;
-            q[rear] = x;
-            cout << "\nNumber pushed in the queue:" << q[rear];
+            cout << arr[i] << " ";
         }
-    }
-    void dque()
-    {
-        if (rear == 0)
-            cout << "\nQueue underflow!!\n";
-        else
-        {
-            if (front == rear)
-            {
-                front = 0;
-                rear = 0;
-            }
-            else
-                front++;
-        }
-        cout << "\nDeleted element is:";
-        result = q[front];
-        cout << result;
-    }
-    void disp()
-    {
-        if (rear == 0)
-            cout << "\nQueue underflow!!\n";
-        else
-            cout << "\nContents of queue is:";
-        for (int i = front + 1; i <= rear; i++)
-            cout << q[i] << " ";
-    }
-    void isFull()
-    {
+        cout << endl;
     }
 };
 int main()
 {
-    int c;
-    queue qu;
-    cout << "\n**********";
-    cout << "QUEUE";
-    cout << "**********\n";
-    do
+    queue q;
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+    q.display();
+    int N, x;
+    for (int i = 0; i < 6; i++)
     {
-        cout << "\n1.Insertion\n2.Deletion\n3.Display\n4. IsEmpty";
-        cout << "\nEnter your choice:";
-        cin >> c;
-        switch (c)
+        cout << "What operation would you like to perform on this stack?\n1. enqueue()\n2. dequeue()\n3. isEmpty()\n4. isFull()\n5. display()\n6. peek()" << endl;
+        cin >> N;
+        switch (N)
         {
         case 1:
-            qu.enq();
+            cout << "What element do u want to enqueue?";
+            cin >> x;
+            q.enqueue(x);
             break;
         case 2:
-            qu.dque();
+            q.dequeue();
             break;
         case 3:
-            qu.disp();
+            cout << q.isEmpty() << endl;
             break;
         case 4:
-            qu.isEmpty();
-        default:
-            cout << "\nInvalid choice!!\n";
+            cout << q.isFull() << endl;
+            break;
+        case 5:
+            q.display();
+            break;
+        case 6:
+            cout << q.peek() << endl;
+            break;
         }
-    } while (c < 4);
-    return 0;
+        q.display();
+    }
 }

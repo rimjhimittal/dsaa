@@ -15,11 +15,11 @@ void binarySearch(int arr[], int n, int ele)
         }
         else if (ele > arr[mid])
         {
-            start = mid;
+            start = mid + 1;
         }
         else
         {
-            end = mid;
+            end = mid - 1;
         }
     }
 }
