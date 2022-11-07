@@ -1,4 +1,4 @@
-// Design the logic to remove the duplicate elements from an array!'
+// Design the logic to remove the duplicate elements from an array'
 #include <iostream>
 using namespace std;
 int main()
