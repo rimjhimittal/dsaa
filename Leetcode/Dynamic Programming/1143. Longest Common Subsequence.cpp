@@ -3,7 +3,29 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+
+int longestCommonSubsequence(string text1, string text2) {
+    vector<vector <int> > dp();
+        int curr=0, prev=0;
+        int m = text1.length();
+        int n = text2.length();
+        for(int i = 0; i< m ;i++){
+            for(int j = 0; j< n; j++){
+                if(text2[j]==text1[i]){
+                    curr=max(prev, curr+1);
+                }
+                else{
+                    prev=curr;
+                }
+            }
+        }
+        return max(prev, curr);
+    }
+
+
 int main()
-//yo
 {
+    string text1 = "abc", text2 = "def";
+     cout<<longestCommonSubsequence(text1, text2);
+    
 }
