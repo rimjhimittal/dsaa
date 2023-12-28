@@ -10,4 +10,8 @@
 using namespace std;
 int main()
 {
+<<<<<<< HEAD
+=======
+    // Now?
+>>>>>>> origin3/main
 }

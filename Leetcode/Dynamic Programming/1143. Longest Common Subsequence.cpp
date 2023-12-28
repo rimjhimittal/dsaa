@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+<<<<<<< HEAD
 
 int longestCommonSubsequence(string text1, string text2) {
     vector<vector <int> > dp();
@@ -28,4 +29,9 @@ int main()
     string text1 = "abc", text2 = "def";
      cout<<longestCommonSubsequence(text1, text2);
     
+=======
+int main()
+{
+    // hi
+>>>>>>> origin3/main
 }
